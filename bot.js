@@ -12,6 +12,7 @@ client.on('ready', () => {
     console.log("Connected Servers:")
     client.guilds.forEach((guild) => {
         console.log(" - " + guild.name)
+        client.user.setActivity("with JavaScript")
         console.log("Ready")
     })
 
@@ -39,6 +40,8 @@ arguments = arguments.toString().replace(/,/g, " ")
         helpCommand(arguments, receivedMessage)
     } else if (primaryCommand == "multiply") {
         multiplyCommand(arguments, receivedMessage)
+      } else if (primaryCommand == "add") {
+          addCommand(arguments, receivedMessage)
     } else {
         receivedMessage.channel.send("I don't understand the command. Try `$help` or `$multiply`")
     }
@@ -62,6 +65,15 @@ function multiplyCommand(arguments, receivedMessage) {
         product = product * parseFloat(value)
     })
     receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
+}
+
+function addCommand(arguments, receivedMessage) {
+    if (arguments.length > 0) {
+        receivedMessage.channel.send("```yaml\n" + arguments + "```" + "\n*posted by " + receivedMessage.author + "*")
+        receivedMessage.delete()
+ } else {
+        receivedMessage.channel.send("Try `$add [text]`")
+    }
 }
 
 })
